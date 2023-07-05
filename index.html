@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <main>
+            <div id="barraLateral" class="barraLateral oculto">
+                <div id="contenedorLogo">
+                    <img class="logo" src="multimedia/logos/logo-no-background.png" alt="Logo AVLA" />
+                </div>
+                <div id="contenedorUsuario"></div>
+                <ul>
+                    <li class="botonMenu activo" id="botonInicio"><a>INICIO</a></li>
+                    <li class="botonMenu" id="botonLista"><a>LISTA ALUMNOS</a></li>
+                    <li class="botonMenu" id="botonNuevoAlumno"><a>NUEVO ALUMNO</a></li>
+                    <li class="botonMenu" id="botonCargarNotas"><a>CARGAR NOTAS</a></li>
+                </ul>
+            </div>
+            <div id="contenedor">
+                <div id="contenedorTitulo" class="contenedorTitulo oculto">
+                    <p id="titulo"></p>
+                    <div id="barraFiltros" class="barraFiltro oculto">
+                        <input type="text" id="buscador" placeholder="Buscá al alumno por Legajo, Nombre, Apellido o Estado" />
+                    </div>
+                </div>
+                <div id="contenedorInfo" class="">
+                    <div id="inicioDato">
+                        <img src="multimedia/logos/logo-no-background.png" alt="" />
+                        <input type="text" class="input" id="inputUsuario" placeholder="Ingresá tu apellido (Perez o Torres)" />
+                        <button class="botonCargar" id="botonInicioUsuario">INICIO</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>

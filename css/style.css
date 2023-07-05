@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #003366;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+}
+
+main {
+    width: 100%;
+    height: 89vh;
+    display: flex;
+}
+
+.barraLateral {
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #001e3c;
+}
+
+#contenedorLogo {
+    width: 250px;
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #001e3c;
+}
+
+.logo {
+    height: 45px;
+    width: auto;
+}
+
+#contenedorUsuario {
+    height: 100px;
+    width: 250px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    background-color: #878787;
+}
+
+.fotoUsuario {
+    height: 75px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.datosUsuario {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+}
+
+ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.botonMenu {
+    width: 100%;
+    height: 75px;
+    font-size: 16px;
+    background-color: #001e3c;
+    color: #ffffff;
+    text-align: center;
+}
+
+.botonCargar {
+    width: 320px;
+    height: 50px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 3px;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    background-color: #003366;
+    transition: 0.5s ease-in-out;
+}
+.botonCargar:hover,
+li:hover {
+    background-color: #145596;
+    border: #145596;
+}
+
+#contenedor {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.contenedorTitulo {
+    width: 100%;
+    height: 85px;
+    background-color: #00254a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+}
+
+#titulo {
+    height: inherit;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+.barraFiltro {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#buscador {
+    width: 500px;
+    height: 50px;
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 16px;
+}
+
+#contenedorInfo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#contenedorInfo h1 {
+    font-size: 40px;
+    position: relative;
+    top: 50%;
+}
+
+#inicioDato {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+#inicioDato img {
+    height: 100px;
+    width: auto;
+    margin-bottom: 50px;
+}
+
+#contenedorLista {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+}
+
+#linea1 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: auto;
+}
+
+.cabecera {
+    text-align: center;
+}
+
+#lista {
+    width: 100%;
+    height: 100%;
+}
+
+.tarjetaAlumno {
+    width: 100%;
+    height: 30px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: auto;
+    border-top: solid 1px #6c6c6c;
+    align-items: center;
+}
+.tarjetaAlumno:last-child {
+    border-bottom: solid 1px #6c6c6c;
+}
+
+.p1 {
+    grid-column: 1;
+    text-align: center;
+}
+.p2 {
+    grid-column: 2;
+    text-align: center;
+}
+.p3 {
+    grid-column: 3;
+    text-align: center;
+}
+.p4 {
+    grid-column: 4;
+    text-align: center;
+}
+.p5 {
+    grid-column: 5;
+    text-align: center;
+}
+.p6 {
+    grid-column: 6;
+    text-align: center;
+}
+.p7 {
+    grid-column: 7;
+    text-align: center;
+}
+.p8 {
+    grid-column: 8;
+    text-align: center;
+}
+.p9 {
+    grid-column: 9;
+    text-align: center;
+}
+.p10 {
+    grid-column: 10;
+    text-align: center;
+}
+
+.datosNuevoAlumno {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.input {
+    width: 320px;
+    height: 50px;
+    border-radius: 3px;
+    padding: 15px;
+    color: #6c6c6c;
+    font-size: 16px;
+}
+
+.oculto {
+    display: none;
+}
