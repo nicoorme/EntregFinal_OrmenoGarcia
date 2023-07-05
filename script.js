@@ -205,8 +205,8 @@ function ejecucionPrograma() {
     botonInicioUsuario.addEventListener('click', () => bienvenida(usuarios, inputUsuario.value, contenedorInfo));
     botonInicioUsuario.addEventListener('click', () => infoUsuario(usuarios, inputUsuario.value));
     botonInicioUsuario.addEventListener('click', () => guardarUsuario(inputUsuario.value));
-    botonInicioUsuario.addEventListener('click', () => mostrarElemento('barraLateral'));
-    botonInicioUsuario.addEventListener('click', () => mostrarElemento('contenedorTitulo'));
+    botonInicioUsuario.addEventListener('click', () => mostrarElemento('barraLateral', 'oculto'));
+    botonInicioUsuario.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'oculto'));
     botonInicioUsuario.addEventListener('click', () => activo('botonInicio', 'botonLista', 'botonNuevoAlumno', 'botonCargarNotas'));
 
     //*------------------------
@@ -214,7 +214,8 @@ function ejecucionPrograma() {
     //*------------------------
     let botonInicio = document.getElementById('botonInicio');
     botonInicio.addEventListener('click', () => inicio(usuarios, contenedorInfo));
-    botonInicio.addEventListener('click', () => ocultarElemento('barraFiltros'));
+    botonInicio.addEventListener('click', () => ocultarElemento('barraFiltros', 'oculto'));
+    botonInicio.addEventListener('click', () => ocultarElemento('contenedorTitulo', 'centrado'));
     botonInicio.addEventListener('click', () => activo('botonInicio', 'botonLista', 'botonNuevoAlumno', 'botonCargarNotas'));
 
     //*-------------------------
@@ -227,7 +228,8 @@ function ejecucionPrograma() {
         ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
         : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
 
-    botonLista.addEventListener('click', () => mostrarElemento('barraFiltros'));
+    botonLista.addEventListener('click', () => mostrarElemento('barraFiltros', 'oculto'));
+    botonLista.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'centrado'));
     botonLista.addEventListener('click', () => activo('botonLista', 'botonInicio', 'botonNuevoAlumno', 'botonCargarNotas'));
 
     //*-------------------------
@@ -247,7 +249,8 @@ function ejecucionPrograma() {
         ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo))
         : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnos, contenedorInfo));
 
-    botonNuevoAlumno.addEventListener('click', () => ocultarElemento('barraFiltros'));
+    botonNuevoAlumno.addEventListener('click', () => ocultarElemento('barraFiltros', 'oculto'));
+    botonNuevoAlumno.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'centrado'));
     botonNuevoAlumno.addEventListener('click', () => activo('botonNuevoAlumno', 'botonLista', 'botonInicio', 'botonCargarNotas'));
 
     //*-------------------------
@@ -260,13 +263,14 @@ function ejecucionPrograma() {
         ? botonCargarNotas.addEventListener('click', () => cargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
         : botonCargarNotas.addEventListener('click', () => cargarNotas(alumnos, notasPosibles, contenedorInfo));
 
-    botonCargarNotas.addEventListener('click', () => ocultarElemento('barraFiltros'));
+    botonCargarNotas.addEventListener('click', () => ocultarElemento('barraFiltros', 'oculto'));
+    botonCargarNotas.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'centrado'));
     botonCargarNotas.addEventListener('click', () => activo('botonCargarNotas', 'botonLista', 'botonInicio', 'botonNuevoAlumno'));
 
     //*-------------------------
     //* EJECUCION TITULO
     //*-------------------------
-    botonInicio.addEventListener('click', () => titulo(''));
+    botonInicio.addEventListener('click', () => titulo('Universidad de Villa La Angostura'));
     botonLista.addEventListener('click', () => titulo('Lista de Alumnos'));
     botonNuevoAlumno.addEventListener('click', () => titulo('Nuevo Alumno'));
     botonCargarNotas.addEventListener('click', () => titulo('Cargar Notas'));
@@ -405,7 +409,7 @@ function contenedorNuevoAlumno(arrayIngresado, contenedor) {
     `;
     let botonCargarNuevoAlumno = document.getElementById('botonCargarNuevoAlumno');
     botonCargarNuevoAlumno.addEventListener('click', () => nuevoAlumno(arrayIngresado, contenedor));
-    botonCargarNuevoAlumno.addEventListener('click', () => mostrarElemento('barraFiltros'));
+    botonCargarNuevoAlumno.addEventListener('click', () => mostrarElemento('barraFiltros', 'oculto'));
 }
 
 function nuevoAlumno(arrayIngresado, contenedor) {
@@ -482,7 +486,7 @@ function cargarNotas(arrayIngresado, arrayNotas, contenedor) {
 
     let botonCargarNotas = document.getElementById('botonCargarNota');
     botonCargarNotas.addEventListener('click', () => nuevaNota(arrayIngresado, inputLegajo, contenedor));
-    botonCargarNotas.addEventListener('click', () => mostrarElemento('barraFiltros'));
+    botonCargarNotas.addEventListener('click', () => mostrarElemento('barraFiltros', 'oculto'));
 }
 
 function nuevaNota(arrayIngresado, legajoBuscado, contenedor) {
@@ -605,14 +609,14 @@ function nuevaNota(arrayIngresado, legajoBuscado, contenedor) {
 //*-------------------------
 //* MOSTRAR / OCULTAR
 //*-------------------------
-function ocultarElemento(id) {
+function ocultarElemento(id, clase) {
     let contenedor = document.getElementById(id);
-    contenedor.classList.add('oculto');
+    contenedor.classList.add(clase);
 }
 
-function mostrarElemento(id) {
+function mostrarElemento(id, clase) {
     let contenedor = document.getElementById(id);
-    contenedor.classList.remove('oculto');
+    contenedor.classList.remove(clase);
 }
 
 //*-------------------------
@@ -639,8 +643,10 @@ function capitalizarPalabras(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
+//*-------------------------
+//* TITULO MENUES
+//*-------------------------
 function titulo(tituloIngresado) {
     let titulo = document.getElementById('titulo');
-    titulo.innerText = `
-    ${tituloIngresado.toUpperCase()}`;
+    titulo.innerText = `${tituloIngresado.toUpperCase()}`;
 }

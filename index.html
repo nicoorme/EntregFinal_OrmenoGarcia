@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>UVLA - Sistema de carga de notas</title>
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
@@ -14,15 +14,23 @@
                 </div>
                 <div id="contenedorUsuario"></div>
                 <ul>
-                    <li class="botonMenu activo" id="botonInicio"><a>INICIO</a></li>
-                    <li class="botonMenu" id="botonLista"><a>LISTA ALUMNOS</a></li>
-                    <li class="botonMenu" id="botonNuevoAlumno"><a>NUEVO ALUMNO</a></li>
-                    <li class="botonMenu" id="botonCargarNotas"><a>CARGAR NOTAS</a></li>
+                    <li class="botonMenu activo" id="botonInicio">
+                        <span><img src="multimedia/iconos/icons8-casa-50.png" class="iconos" alt="" /></span><a>INICIO</a>
+                    </li>
+                    <li class="botonMenu" id="botonLista">
+                        <span><img src="multimedia/iconos/icons8-lista-50.png" class="iconos" alt="" /></span><a>LISTA ALUMNOS</a>
+                    </li>
+                    <li class="botonMenu" id="botonNuevoAlumno">
+                        <span><img src="multimedia/iconos/icons8-nuevo-50.png" class="iconos" alt="" /></span><a>NUEVO ALUMNO</a>
+                    </li>
+                    <li class="botonMenu" id="botonCargarNotas">
+                        <span><img src="multimedia/iconos/icons8-notas-50.png" class="iconos" alt="" /></span><a>CARGAR NOTAS</a>
+                    </li>
                 </ul>
             </div>
             <div id="contenedor">
-                <div id="contenedorTitulo" class="contenedorTitulo oculto">
-                    <p id="titulo"></p>
+                <div id="contenedorTitulo" class="centrado contenedorTitulo oculto">
+                    <p id="titulo">UNIVERSIDAD DE VILLA LA ANGOSTURA</p>
                     <div id="barraFiltros" class="barraFiltro oculto">
                         <input type="text" id="buscador" placeholder="Buscá al alumno por Legajo, Nombre, Apellido o Estado" />
                     </div>
