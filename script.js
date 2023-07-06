@@ -203,6 +203,13 @@ function ejecucionPrograma() {
 
     let botonInicioUsuario = document.getElementById('botonInicioUsuario');
     botonInicioUsuario.addEventListener('click', () => bienvenida(usuarios, inputUsuario.value, contenedorInfo));
+    inputUsuario.addEventListener('keypress', (e) => funcionEnter(e, usuarios, inputUsuario.value, contenedorInfo));
+
+    function funcionEnter(e, arrayIngresado, input, contenedor) {
+        if (e.which === 13 || e.keyCode === 13) {
+            bienvenida(arrayIngresado, input, contenedor);
+        }
+    }
 
     //*------------------------
     //* EJECUCION INICIO
@@ -243,8 +250,8 @@ function ejecucionPrograma() {
     let botonCargarNotas = document.getElementById('botonCargarNotas');
 
     alumnosJSON
-        ? botonCargarNotas.addEventListener('click', () => cargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
-        : botonCargarNotas.addEventListener('click', () => cargarNotas(alumnos, notasPosibles, contenedorInfo));
+        ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
+        : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
 }
 
 //*------------------------
@@ -380,7 +387,20 @@ function contenedorNuevoAlumno(arrayIngresado, contenedor) {
         </div>
     `;
     let botonCargarNuevoAlumno = document.getElementById('botonCargarNuevoAlumno');
+    let inputNombre = document.getElementById('nombreNuevoAlumno');
+    let inputApellido = document.getElementById('apellidoNuevoAlumno');
+    let inputDNI = document.getElementById('dniNuevoAlumno');
     botonCargarNuevoAlumno.addEventListener('click', () => nuevoAlumno(arrayIngresado));
+
+    inputNombre.addEventListener('keypress', (e) => funcionEnter(e, arrayIngresado));
+    inputApellido.addEventListener('keypress', (e) => funcionEnter(e, arrayIngresado));
+    inputDNI.addEventListener('keypress', (e) => funcionEnter(e, arrayIngresado));
+
+    function funcionEnter(e, arrayIngresado) {
+        if (e.which === 13 || e.keyCode === 13) {
+            nuevoAlumno(arrayIngresado);
+        }
+    }
 }
 
 function nuevoAlumno(arrayIngresado) {
@@ -413,19 +433,19 @@ function nuevoAlumno(arrayIngresado) {
 //*-------------------------
 //* CARGAR NOTAS
 //*-------------------------
-function cargarNotas(arrayIngresado, arrayNotas, contenedor) {
+function contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor) {
     ocultarElemento('barraFiltros', 'oculto');
     mostrarElemento('contenedorTitulo', 'centrado');
     titulo('Cargar Notas');
     contenedor.innerHTML = `
         <div class="datosNuevoAlumno">
-        <select class="input" id="inputAlumnos"><option>Seleccioná un alumno</option></select>
-        <select class="input inputNotas" id="inputTP1"><option value='-'>Seleccioná la nota del TP1</option></select>
-        <select class="input inputNotas" id="inputTP2"><option value='-'>Seleccioná la nota del TP2</option></select>
-        <select class="input inputNotas" id="inputTP3"><option value='-'>Seleccioná la nota del TP3</option></select>
-        <select class="input inputNotas" id="inputTP4"><option value='-'>Seleccioná la nota del TP4</option></select>
-        <select class="input inputNotas" id="inputPrimerParcial"><option value='-'>Seleccioná la nota del Primer Parcial</option></select>
-        <select class="input inputNotas" id="inputSegundoParcial"><option value='-'>Seleccioná la nota del Segundo Parcial</option></select>
+        <select class="input" id="inputAlumnos"><option value="-">Seleccioná un alumno</option></select>
+        <select class="input inputNotas" id="inputTP1"><option value="-">Seleccioná la nota del TP1</option></select>
+        <select class="input inputNotas" id="inputTP2"><option value="-">Seleccioná la nota del TP2</option></select>
+        <select class="input inputNotas" id="inputTP3"><option value="-">Seleccioná la nota del TP3</option></select>
+        <select class="input inputNotas" id="inputTP4"><option value="-">Seleccioná la nota del TP4</option></select>
+        <select class="input inputNotas" id="inputPrimerParcial"><option value="-">Seleccioná la nota del Primer Parcial</option></select>
+        <select class="input inputNotas" id="inputSegundoParcial"><option value="-">Seleccioná la nota del Segundo Parcial</option></select>
         <button class="botonCargar" id="botonCargarNota">CARGAR</button>
         </div>
         `;
@@ -437,7 +457,11 @@ function cargarNotas(arrayIngresado, arrayNotas, contenedor) {
         elementosListaAlumnos.innerText = `
         ${legajo} - ${nombre} ${apellido}
         `;
-        elementosListaAlumnos.value = `${legajo}`;
+        if (`${legajo}`) {
+            elementosListaAlumnos.value = `${legajo}`;
+        } else {
+            elementosListaAlumnos.value = '';
+        }
 
         inputAlumnos.appendChild(elementosListaAlumnos);
 
@@ -466,122 +490,128 @@ function cargarNotas(arrayIngresado, arrayNotas, contenedor) {
     botonCargarNotas.addEventListener('click', () => nuevaNota(arrayIngresado, inputLegajo, contenedor, arrayNotas));
 }
 
-function nuevaNota(arrayIngresado, legajoBuscado, contenedor, arrayNotas) {
-    let inputTP1 = document.getElementById('inputTP1');
-    let inputTP2 = document.getElementById('inputTP2');
-    let inputTP3 = document.getElementById('inputTP3');
-    let inputTP4 = document.getElementById('inputTP4');
-    let inputPrimerParcial = document.getElementById('inputPrimerParcial');
-    let inputSegundoParcial = document.getElementById('inputSegundoParcial');
+function nuevaNota(arrayIngresado, inputLegajo, contenedor, arrayNotas) {
+    console.log(inputLegajo);
 
-    let alumnoNotas = arrayIngresado.find(({ legajo }) => legajo == legajoBuscado);
-
-    let tp1;
-    let dato1 = inputTP1.value;
-    if (!dato1) {
-        tp1 = '-';
-    } else if (dato1 == 'ausente') {
-        tp1 = 1;
+    if (inputLegajo == undefined) {
+        alertError('Alumno no ingresado');
     } else {
-        tp1 = dato1;
+        let inputTP1 = document.getElementById('inputTP1');
+        let inputTP2 = document.getElementById('inputTP2');
+        let inputTP3 = document.getElementById('inputTP3');
+        let inputTP4 = document.getElementById('inputTP4');
+        let inputPrimerParcial = document.getElementById('inputPrimerParcial');
+        let inputSegundoParcial = document.getElementById('inputSegundoParcial');
+
+        let alumnoNotas = arrayIngresado.find(({ legajo }) => legajo == inputLegajo);
+
+        let tp1;
+        let dato1 = inputTP1.value;
+        if (!dato1) {
+            tp1 = '-';
+        } else if (dato1 == 'ausente') {
+            tp1 = 1;
+        } else {
+            tp1 = dato1;
+        }
+
+        let tp2;
+        let dato2 = inputTP2.value;
+        if (!dato2) {
+            tp2 = '-';
+        } else if (dato2 == 'ausente') {
+            tp2 = 1;
+        } else {
+            tp2 = dato2;
+        }
+
+        let tp3;
+        let dato3 = inputTP3.value;
+        if (!dato3) {
+            tp3 = '-';
+        } else if (dato3 == 'ausente') {
+            tp3 = 1;
+        } else {
+            tp3 = dato3;
+        }
+
+        let tp4;
+        let dato4 = inputTP4.value;
+        if (!dato4) {
+            tp4 = '-';
+        } else if (dato4 == 'ausente') {
+            tp4 = 1;
+        } else {
+            tp4 = dato4;
+        }
+
+        let primerParcial;
+        let dato5 = inputPrimerParcial.value;
+        if (!dato5) {
+            primerParcial = '-';
+        } else if (dato5 == 'ausente') {
+            primerParcial = 1;
+        } else {
+            primerParcial = dato5;
+        }
+
+        let segundoParcial;
+        let dato6 = inputSegundoParcial.value;
+        if (!dato6) {
+            segundoParcial = '-';
+        } else if (dato6 == 'ausente') {
+            segundoParcial = 1;
+        } else {
+            segundoParcial = dato6;
+        }
+
+        alumnoNotas.tp1 = tp1;
+        alumnoNotas.tp2 = tp2;
+        alumnoNotas.tp3 = tp3;
+        alumnoNotas.tp4 = tp4;
+        alumnoNotas.primerParcial = primerParcial;
+        alumnoNotas.segundoParcial = segundoParcial;
+
+        let condicion1;
+        tp1 >= 7 ? (condicion1 = 1) : (condicion1 = 0);
+
+        let condicion2;
+        tp2 >= 7 ? (condicion2 = 1) : (condicion2 = 0);
+
+        let condicion3;
+        tp3 >= 7 ? (condicion3 = 1) : (condicion3 = 0);
+
+        let condicion4;
+        tp4 >= 7 ? (condicion4 = 1) : (condicion4 = 0);
+
+        let sumaTP = condicion1 + condicion2 + condicion3 + condicion4;
+        let condicionTP;
+
+        if (sumaTP == 4) {
+            condicionTP = 2;
+        } else if (sumaTP == 3) {
+            condicionTP = 1;
+        } else {
+            condicionTP = 0;
+        }
+
+        if (alumnoNotas.primerParcial >= 7 && alumnoNotas.segundoParcial >= 7) {
+            alumnoNotas.estado = 'APROBADO';
+        } else if (condicionTP == 2 && alumnoNotas.primerParcial >= 5 && alumnoNotas.segundoParcial >= 5) {
+            alumnoNotas.estado = 'APROBADO';
+        } else if (alumnoNotas.primerParcial < 5 || alumnoNotas.segundoParcial < 5) {
+            alumnoNotas.estado = 'LIBRE';
+        } else if (alumnoNotas.primerParcial == '-' || alumnoNotas.segundoParcial == '-') {
+            alumnoNotas.estado = '-';
+        } else if (alumnoNotas.primerParcial == 'AUSENTE' || alumnoNotas.segundoParcial == 'AUSENTE') {
+            alumnoNotas.estado = 'LIBRE';
+        } else {
+            alumnoNotas.estado = 'REGULAR';
+        }
+        localStorage.setItem('alumnosStorage', JSON.stringify(arrayIngresado));
+        alertOk('Notas cargadas');
+        contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor);
     }
-
-    let tp2;
-    let dato2 = inputTP2.value;
-    if (!dato2) {
-        tp2 = '-';
-    } else if (dato2 == 'ausente') {
-        tp2 = 1;
-    } else {
-        tp2 = dato2;
-    }
-
-    let tp3;
-    let dato3 = inputTP3.value;
-    if (!dato3) {
-        tp3 = '-';
-    } else if (dato3 == 'ausente') {
-        tp3 = 1;
-    } else {
-        tp3 = dato3;
-    }
-
-    let tp4;
-    let dato4 = inputTP4.value;
-    if (!dato4) {
-        tp4 = '-';
-    } else if (dato4 == 'ausente') {
-        tp4 = 1;
-    } else {
-        tp4 = dato4;
-    }
-
-    let primerParcial;
-    let dato5 = inputPrimerParcial.value;
-    if (!dato5) {
-        primerParcial = '-';
-    } else if (dato5 == 'ausente') {
-        primerParcial = 1;
-    } else {
-        primerParcial = dato5;
-    }
-
-    let segundoParcial;
-    let dato6 = inputSegundoParcial.value;
-    if (!dato6) {
-        segundoParcial = '-';
-    } else if (dato6 == 'ausente') {
-        segundoParcial = 1;
-    } else {
-        segundoParcial = dato6;
-    }
-
-    alumnoNotas.tp1 = tp1;
-    alumnoNotas.tp2 = tp2;
-    alumnoNotas.tp3 = tp3;
-    alumnoNotas.tp4 = tp4;
-    alumnoNotas.primerParcial = primerParcial;
-    alumnoNotas.segundoParcial = segundoParcial;
-
-    let condicion1;
-    tp1 >= 7 ? (condicion1 = 1) : (condicion1 = 0);
-
-    let condicion2;
-    tp2 >= 7 ? (condicion2 = 1) : (condicion2 = 0);
-
-    let condicion3;
-    tp3 >= 7 ? (condicion3 = 1) : (condicion3 = 0);
-
-    let condicion4;
-    tp4 >= 7 ? (condicion4 = 1) : (condicion4 = 0);
-
-    let sumaTP = condicion1 + condicion2 + condicion3 + condicion4;
-    let condicionTP;
-
-    if (sumaTP == 4) {
-        condicionTP = 2;
-    } else if (sumaTP == 3) {
-        condicionTP = 1;
-    } else {
-        condicionTP = 0;
-    }
-
-    if (alumnoNotas.primerParcial >= 7 && alumnoNotas.segundoParcial >= 7) {
-        alumnoNotas.estado = 'APROBADO';
-    } else if (condicionTP == 2 && alumnoNotas.primerParcial >= 5 && alumnoNotas.segundoParcial >= 5) {
-        alumnoNotas.estado = 'APROBADO';
-    } else if (alumnoNotas.primerParcial < 5 || alumnoNotas.segundoParcial < 5) {
-        alumnoNotas.estado = 'LIBRE';
-    } else if (alumnoNotas.primerParcial == '-' || alumnoNotas.segundoParcial == '-') {
-        alumnoNotas.estado = '-';
-    } else if (alumnoNotas.primerParcial == 'AUSENTE' || alumnoNotas.segundoParcial == 'AUSENTE') {
-        alumnoNotas.estado = 'LIBRE';
-    } else {
-        alumnoNotas.estado = 'REGULAR';
-    }
-    localStorage.setItem('alumnosStorage', JSON.stringify(arrayIngresado));
-    alertOk('Notas cargadas');
-    cargarNotas(arrayIngresado, arrayNotas, contenedor);
 }
 
 //*-------------------------
