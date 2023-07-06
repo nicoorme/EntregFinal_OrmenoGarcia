@@ -272,37 +272,25 @@ function bienvenida(arrayUsuarios, usuario, contenedor) {
             confirmButtonText: 'Reintentar',
             confirmButtonColor: '#003366',
         });
+        resetInputs('input');
     }
 }
 
 function infoUsuario(arrayUsuarios, usuario) {
     let contenedorUsuario = document.getElementById('contenedorUsuario');
     let usuarioEncontrado = arrayUsuarios.find(({ login }) => login == usuario.toLowerCase());
-    if (usuarioEncontrado) {
-        contenedorUsuario.innerHTML = `
+
+    contenedorUsuario.innerHTML = `
                 <img class="fotoUsuario" src="multimedia/img/${usuarioEncontrado.rutaImagen}" alt="">
                 <div id="datosUsuario">
                 <p id="textoUsuario"></p>
                 <p id="legajoUsuario"></p>
                 </div>
             `;
-        let textoUsuario = document.getElementById('textoUsuario');
-        let legajoUsuario = document.getElementById('legajoUsuario');
-        textoUsuario.innerText = `${usuarioEncontrado.nombre} ${usuarioEncontrado.apellido}`;
-        legajoUsuario.innerText = `Legajo: ${usuarioEncontrado.legajo}`;
-    } else if (!usuarioEncontrado) {
-        contenedorUsuario.innerHTML = `
-                        <img class="fotoUsuario" src="multimedia/img/invitado.jpeg" alt="">
-                        <div id="datosUsuario">
-                        <p id="textoUsuario"></p>
-                        <p id="legajoUsuario"></p>
-                        </div>
-                    `;
-        let textoUsuario = document.getElementById('textoUsuario');
-        let legajoUsuario = document.getElementById('legajoUsuario');
-        textoUsuario.innerText = `INVITADO`;
-        legajoUsuario.innerText = `Legajo: -`;
-    }
+    let textoUsuario = document.getElementById('textoUsuario');
+    let legajoUsuario = document.getElementById('legajoUsuario');
+    textoUsuario.innerText = `${usuarioEncontrado.nombre} ${usuarioEncontrado.apellido}`;
+    legajoUsuario.innerText = `Legajo: ${usuarioEncontrado.legajo}`;
 }
 
 function guardarUsuario(usuario) {
@@ -392,10 +380,10 @@ function contenedorNuevoAlumno(arrayIngresado, contenedor) {
         </div>
     `;
     let botonCargarNuevoAlumno = document.getElementById('botonCargarNuevoAlumno');
-    botonCargarNuevoAlumno.addEventListener('click', () => nuevoAlumno(arrayIngresado, contenedor));
+    botonCargarNuevoAlumno.addEventListener('click', () => nuevoAlumno(arrayIngresado));
 }
 
-function nuevoAlumno(arrayIngresado, contenedor) {
+function nuevoAlumno(arrayIngresado) {
     let legajoNuevo = arrayIngresado[arrayIngresado.length - 1].legajo;
     let nombre = document.getElementById('nombreNuevoAlumno').value;
     nombre = capitalizarPalabras(nombre);
@@ -411,9 +399,13 @@ function nuevoAlumno(arrayIngresado, contenedor) {
     let segundoParcial = '-';
     let estado = '-';
     legajoNuevo = legajo;
-
-    arrayIngresado.push({ legajo, nombre, apellido, dni, tp1, tp2, tp3, tp4, primerParcial, segundoParcial, estado });
-    alertOk('Alumno ingresado');
+    if (nombre && apellido && dni) {
+        arrayIngresado.push({ legajo, nombre, apellido, dni, tp1, tp2, tp3, tp4, primerParcial, segundoParcial, estado });
+        alertOk('Alumno ingresado');
+        resetInputs('input');
+    } else {
+        alertError('Datos incompletos');
+    }
 
     localStorage.setItem('alumnosStorage', JSON.stringify(arrayIngresado));
 }
@@ -471,10 +463,10 @@ function cargarNotas(arrayIngresado, arrayNotas, contenedor) {
     });
 
     let botonCargarNotas = document.getElementById('botonCargarNota');
-    botonCargarNotas.addEventListener('click', () => nuevaNota(arrayIngresado, inputLegajo, contenedor));
+    botonCargarNotas.addEventListener('click', () => nuevaNota(arrayIngresado, inputLegajo, contenedor, arrayNotas));
 }
 
-function nuevaNota(arrayIngresado, legajoBuscado, contenedor) {
+function nuevaNota(arrayIngresado, legajoBuscado, contenedor, arrayNotas) {
     let inputTP1 = document.getElementById('inputTP1');
     let inputTP2 = document.getElementById('inputTP2');
     let inputTP3 = document.getElementById('inputTP3');
@@ -588,7 +580,8 @@ function nuevaNota(arrayIngresado, legajoBuscado, contenedor) {
         alumnoNotas.estado = 'REGULAR';
     }
     localStorage.setItem('alumnosStorage', JSON.stringify(arrayIngresado));
-    alert('Notas cargadas');
+    alertOk('Notas cargadas');
+    cargarNotas(arrayIngresado, arrayNotas, contenedor);
 }
 
 //*-------------------------
@@ -639,4 +632,12 @@ function alertError(texto) {
         backgroundColor: '#001e3c',
         avatar: 'multimedia/iconos/icons8-error-50.png',
     }).showToast();
+}
+
+//*-------------------------
+//* RESET INPUTS
+//*-------------------------
+function resetInputs(clase) {
+    let inputs = document.querySelectorAll(clase);
+    inputs.forEach((input) => (input.value = ''));
 }
