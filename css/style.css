@@ -94,7 +94,6 @@ li {
 
 .iconos {
     width: 25px;
-    filter: invert(1);
 }
 
 .botonCargar {
@@ -108,10 +107,13 @@ li {
     background-color: #003366;
     transition: 0.3s ease-in-out;
 }
-.botonCargar:hover,
-li:hover {
+.botonCargar:hover {
     background-color: #145596;
     border: #145596;
+}
+
+li:hover {
+    background-color: #003366;
 }
 
 #contenedor {

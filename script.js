@@ -203,20 +203,12 @@ function ejecucionPrograma() {
 
     let botonInicioUsuario = document.getElementById('botonInicioUsuario');
     botonInicioUsuario.addEventListener('click', () => bienvenida(usuarios, inputUsuario.value, contenedorInfo));
-    botonInicioUsuario.addEventListener('click', () => infoUsuario(usuarios, inputUsuario.value));
-    botonInicioUsuario.addEventListener('click', () => guardarUsuario(inputUsuario.value));
-    botonInicioUsuario.addEventListener('click', () => mostrarElemento('barraLateral', 'oculto'));
-    botonInicioUsuario.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'oculto'));
-    botonInicioUsuario.addEventListener('click', () => activo('botonInicio', 'botonLista', 'botonNuevoAlumno', 'botonCargarNotas'));
 
     //*------------------------
     //* EJECUCION INICIO
     //*------------------------
     let botonInicio = document.getElementById('botonInicio');
     botonInicio.addEventListener('click', () => inicio(usuarios, contenedorInfo));
-    botonInicio.addEventListener('click', () => ocultarElemento('barraFiltros', 'oculto'));
-    botonInicio.addEventListener('click', () => ocultarElemento('contenedorTitulo', 'centrado'));
-    botonInicio.addEventListener('click', () => activo('botonInicio', 'botonLista', 'botonNuevoAlumno', 'botonCargarNotas'));
 
     //*-------------------------
     //* EJECUCION LISTA ALUMNOS
@@ -227,9 +219,6 @@ function ejecucionPrograma() {
     alumnosJSON
         ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
         : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
-
-    botonLista.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'centrado'));
-    botonLista.addEventListener('click', () => activo('botonLista', 'botonInicio', 'botonNuevoAlumno', 'botonCargarNotas'));
 
     //*-------------------------
     //* EJECUCION BUSCADOR
@@ -248,40 +237,19 @@ function ejecucionPrograma() {
         ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo))
         : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnos, contenedorInfo));
 
-    botonNuevoAlumno.addEventListener('click', () => ocultarElemento('barraFiltros', 'oculto'));
-    botonNuevoAlumno.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'centrado'));
-    botonNuevoAlumno.addEventListener('click', () => activo('botonNuevoAlumno', 'botonLista', 'botonInicio', 'botonCargarNotas'));
-
     //*-------------------------
     //* EJECUCION CARGAR NOTAS
     //*-------------------------
-
     let botonCargarNotas = document.getElementById('botonCargarNotas');
 
     alumnosJSON
         ? botonCargarNotas.addEventListener('click', () => cargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
         : botonCargarNotas.addEventListener('click', () => cargarNotas(alumnos, notasPosibles, contenedorInfo));
-
-    botonCargarNotas.addEventListener('click', () => ocultarElemento('barraFiltros', 'oculto'));
-    botonCargarNotas.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'centrado'));
-    botonCargarNotas.addEventListener('click', () => activo('botonCargarNotas', 'botonLista', 'botonInicio', 'botonNuevoAlumno'));
-
-    //*-------------------------
-    //* EJECUCION TITULO
-    //*-------------------------
-    botonInicio.addEventListener('click', () => titulo('Universidad de Villa La Angostura'));
-    botonLista.addEventListener('click', () => titulo('Lista de Alumnos'));
-    botonNuevoAlumno.addEventListener('click', () => titulo('Nuevo Alumno'));
-    botonCargarNotas.addEventListener('click', () => titulo('Cargar Notas'));
 }
 
 //*------------------------
 //* INICIO
 //*------------------------
-function guardarUsuario(usuario) {
-    sessionStorage.setItem('usuarioGuardado', usuario);
-}
-
 function bienvenida(arrayUsuarios, usuario, contenedor) {
     let usuarioEncontrado = arrayUsuarios.find(({ login }) => login.toLowerCase() === usuario.toLowerCase());
     if (usuarioEncontrado) {
@@ -292,14 +260,18 @@ function bienvenida(arrayUsuarios, usuario, contenedor) {
             : (contenedor.innerHTML = `
                     <h1 class="inicio">Bienvenido ${usuarioEncontrado.nombre}</h1>
                     `);
+        guardarUsuario(usuario);
+        infoUsuario(arrayUsuarios, usuario);
+        mostrarElemento('barraLateral', 'oculto');
+        mostrarElemento('contenedorTitulo', 'oculto');
     } else if (!usuarioEncontrado) {
-        contenedor.innerHTML = `
-                <h1 class="inicio">HOLA ${usuario.toUpperCase()}</h1>
-                `;
-    } else if (usuario == '') {
-        contenedor.innerHTML = `
-                <h1 class="inicio">HOLA INVITADO</h1>
-                `;
+        Swal.fire({
+            title: 'Error!',
+            text: 'El usuario es invalido',
+            icon: 'error',
+            confirmButtonText: 'Reintentar',
+            confirmButtonColor: '#003366',
+        });
     }
 }
 
@@ -333,7 +305,14 @@ function infoUsuario(arrayUsuarios, usuario) {
     }
 }
 
+function guardarUsuario(usuario) {
+    sessionStorage.setItem('usuarioGuardado', usuario);
+}
+
 function inicio(arrayIngresado, contenedor) {
+    titulo('Universidad de Villa La Angostura');
+    ocultarElemento('barraFiltros', 'oculto');
+    ocultarElemento('contenedorTitulo', 'centrado');
     let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
     bienvenida(arrayIngresado, usuarioGuardado, contenedor);
 }
@@ -343,6 +322,8 @@ function inicio(arrayIngresado, contenedor) {
 //*-------------------------
 function listaAlumnos(array, contenedor) {
     mostrarElemento('barraFiltros', 'oculto');
+    mostrarElemento('contenedorTitulo', 'centrado');
+    titulo('Lista de Alumnos');
     contenedor.innerHTML = `
         <div id="contenedorLista">
             <div id="linea1">
@@ -399,6 +380,9 @@ function filtrarYListar(arrayIngresado, input, contenedor) {
 //* NUEVO ALUMNO
 //*-------------------------
 function contenedorNuevoAlumno(arrayIngresado, contenedor) {
+    ocultarElemento('barraFiltros', 'oculto');
+    mostrarElemento('contenedorTitulo', 'centrado');
+    titulo('Nuevo Alumno');
     contenedor.innerHTML = `
         <div class="datosNuevoAlumno">
             <input type="text" class="input" id="nombreNuevoAlumno" placeholder="Ingresá el nombre del alumno">
@@ -429,7 +413,7 @@ function nuevoAlumno(arrayIngresado, contenedor) {
     legajoNuevo = legajo;
 
     arrayIngresado.push({ legajo, nombre, apellido, dni, tp1, tp2, tp3, tp4, primerParcial, segundoParcial, estado });
-    alert('Alumno ingresado');
+    alertOk('Alumno ingresado');
 
     localStorage.setItem('alumnosStorage', JSON.stringify(arrayIngresado));
 }
@@ -438,6 +422,9 @@ function nuevoAlumno(arrayIngresado, contenedor) {
 //* CARGAR NOTAS
 //*-------------------------
 function cargarNotas(arrayIngresado, arrayNotas, contenedor) {
+    ocultarElemento('barraFiltros', 'oculto');
+    mostrarElemento('contenedorTitulo', 'centrado');
+    titulo('Cargar Notas');
     contenedor.innerHTML = `
         <div class="datosNuevoAlumno">
         <select class="input" id="inputAlumnos"><option>Seleccioná un alumno</option></select>
@@ -618,23 +605,6 @@ function mostrarElemento(id, clase) {
 }
 
 //*-------------------------
-//* ESTILO ACTIVO BOTONES
-//*-------------------------
-function activo(botonActivado, botonDesactivado1, botonDesactivado2, botonDesactivado3) {
-    let contenedor = document.getElementById(botonActivado);
-    contenedor.classList.add('activo');
-
-    let contenedor1 = document.getElementById(botonDesactivado1);
-    contenedor1.classList.remove('activo');
-
-    let contenedor2 = document.getElementById(botonDesactivado2);
-    contenedor2.classList.remove('activo');
-
-    let contenedor3 = document.getElementById(botonDesactivado3);
-    contenedor3.classList.remove('activo');
-}
-
-//*-------------------------
 //* CAPITALIZAR PALABRAS
 //*-------------------------
 function capitalizarPalabras(string) {
@@ -652,13 +622,21 @@ function titulo(tituloIngresado) {
 //*-------------------------
 //* ALERTS
 //*-------------------------
-function alert(texto) {
+function alertOk(texto) {
     Toastify({
         text: texto,
         duration: 3000,
         gravity: 'bottom',
-        style: {
-            background: '#001e3c',
-        },
+        backgroundColor: '#001e3c',
+        avatar: 'multimedia/iconos/icons8-de-acuerdo-50.png',
+    }).showToast();
+}
+function alertError(texto) {
+    Toastify({
+        text: texto,
+        duration: 3000,
+        gravity: 'bottom',
+        backgroundColor: '#001e3c',
+        avatar: 'multimedia/iconos/icons8-error-50.png',
     }).showToast();
 }
