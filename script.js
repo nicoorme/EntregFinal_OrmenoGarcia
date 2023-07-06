@@ -228,7 +228,6 @@ function ejecucionPrograma() {
         ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
         : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
 
-    botonLista.addEventListener('click', () => mostrarElemento('barraFiltros', 'oculto'));
     botonLista.addEventListener('click', () => mostrarElemento('contenedorTitulo', 'centrado'));
     botonLista.addEventListener('click', () => activo('botonLista', 'botonInicio', 'botonNuevoAlumno', 'botonCargarNotas'));
 
@@ -343,6 +342,7 @@ function inicio(arrayIngresado, contenedor) {
 //* LISTA ALUMNOS
 //*-------------------------
 function listaAlumnos(array, contenedor) {
+    mostrarElemento('barraFiltros', 'oculto');
     contenedor.innerHTML = `
         <div id="contenedorLista">
             <div id="linea1">
@@ -409,7 +409,6 @@ function contenedorNuevoAlumno(arrayIngresado, contenedor) {
     `;
     let botonCargarNuevoAlumno = document.getElementById('botonCargarNuevoAlumno');
     botonCargarNuevoAlumno.addEventListener('click', () => nuevoAlumno(arrayIngresado, contenedor));
-    botonCargarNuevoAlumno.addEventListener('click', () => mostrarElemento('barraFiltros', 'oculto'));
 }
 
 function nuevoAlumno(arrayIngresado, contenedor) {
@@ -430,7 +429,7 @@ function nuevoAlumno(arrayIngresado, contenedor) {
     legajoNuevo = legajo;
 
     arrayIngresado.push({ legajo, nombre, apellido, dni, tp1, tp2, tp3, tp4, primerParcial, segundoParcial, estado });
-    listaAlumnos(arrayIngresado, contenedor);
+    alert('Alumno ingresado');
 
     localStorage.setItem('alumnosStorage', JSON.stringify(arrayIngresado));
 }
@@ -486,7 +485,6 @@ function cargarNotas(arrayIngresado, arrayNotas, contenedor) {
 
     let botonCargarNotas = document.getElementById('botonCargarNota');
     botonCargarNotas.addEventListener('click', () => nuevaNota(arrayIngresado, inputLegajo, contenedor));
-    botonCargarNotas.addEventListener('click', () => mostrarElemento('barraFiltros', 'oculto'));
 }
 
 function nuevaNota(arrayIngresado, legajoBuscado, contenedor) {
@@ -603,7 +601,7 @@ function nuevaNota(arrayIngresado, legajoBuscado, contenedor) {
         alumnoNotas.estado = 'REGULAR';
     }
     localStorage.setItem('alumnosStorage', JSON.stringify(arrayIngresado));
-    listaAlumnos(arrayIngresado, contenedor);
+    alert('Notas cargadas');
 }
 
 //*-------------------------
@@ -649,4 +647,18 @@ function capitalizarPalabras(string) {
 function titulo(tituloIngresado) {
     let titulo = document.getElementById('titulo');
     titulo.innerText = `${tituloIngresado.toUpperCase()}`;
+}
+
+//*-------------------------
+//* ALERTS
+//*-------------------------
+function alert(texto) {
+    Toastify({
+        text: texto,
+        duration: 3000,
+        gravity: 'bottom',
+        style: {
+            background: '#001e3c',
+        },
+    }).showToast();
 }
