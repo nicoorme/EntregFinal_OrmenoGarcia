@@ -273,8 +273,7 @@ function bienvenida(arrayUsuarios, usuario, contenedor) {
         mostrarElemento('contenedorTitulo', 'oculto');
     } else if (!usuarioEncontrado) {
         Swal.fire({
-            title: 'Error!',
-            text: 'El usuario es invalido',
+            text: 'Usuario invalido',
             icon: 'error',
             confirmButtonText: 'Reintentar',
             confirmButtonColor: '#003366',
@@ -342,16 +341,16 @@ function listaAlumnos(array, contenedor) {
 
         tarjetaAlumno.classList.add('tarjetaAlumno');
         tarjetaAlumno.innerHTML = `
-            <p class = 'p1'>${legajo}</p>
-            <p class = 'p2'>${nombre}</p>
-            <p class = 'p3'>${apellido}</p>
-            <p class = 'p4'>${tp1}</p>
-            <p class = 'p5'>${tp2}</p>
-            <p class = 'p6'>${tp3}</p>
-            <p class = 'p7'>${tp4}</p>
-            <p class = 'p8'>${primerParcial}</p>
-            <p class = 'p9'>${segundoParcial}</p>
-            <p class = 'p10'>${estado}</p>
+            <p>${legajo}</p>
+            <p>${nombre}</p>
+            <p>${apellido}</p>
+            <p>${tp1}</p>
+            <p>${tp2}</p>
+            <p>${tp3}</p>
+            <p>${tp4}</p>
+            <p>${primerParcial}</p>
+            <p>${segundoParcial}</p>
+            <p>${estado}</p>
         `;
         lista.appendChild(tarjetaAlumno);
     });
@@ -493,8 +492,8 @@ function contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor) {
 function nuevaNota(arrayIngresado, inputLegajo, contenedor, arrayNotas) {
     console.log(inputLegajo);
 
-    if (inputLegajo == undefined) {
-        alertError('Alumno no ingresado');
+    if (inputLegajo == undefined || inputLegajo == '-') {
+        alertError('Alumno no seleccionado');
     } else {
         let inputTP1 = document.getElementById('inputTP1');
         let inputTP2 = document.getElementById('inputTP2');
