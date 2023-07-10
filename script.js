@@ -198,19 +198,10 @@ function ejecucionPrograma() {
     //*------------------------
     //* LOGIN
     //*------------------------
-    let inputUsuario = document.getElementById('inputUsuario');
     let contenedorInfo = document.getElementById('contenedorInfo');
-
-    let botonInicioUsuario = document.getElementById('botonInicioUsuario');
-    botonInicioUsuario.addEventListener('click', () => bienvenida(usuarios, inputUsuario.value, contenedorInfo));
-    inputUsuario.addEventListener('keypress', (e) => funcionEnter(e, usuarios, inputUsuario.value, contenedorInfo));
-
-    function funcionEnter(e, arrayIngresado, input, contenedor) {
-        if (e.which === 13 || e.keyCode === 13) {
-            bienvenida(arrayIngresado, input, contenedor);
-        }
-    }
-
+    let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
+    //TODO-------
+    !usuarioGuardado ? login(usuarios, contenedorInfo) : bienvenida(usuarios, usuarioGuardado, contenedor);
     //*------------------------
     //* EJECUCION INICIO
     //*------------------------
@@ -252,6 +243,34 @@ function ejecucionPrograma() {
     alumnosJSON
         ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
         : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
+
+    //*-------------------------
+    //* EJECUCION CERRAR SESION
+    //*-------------------------
+    let botonCerrarSesion = document.getElementById('botonCerrarSesion');
+    botonCerrarSesion.addEventListener('click', logout);
+}
+
+//*-------------------------
+//* LOGIN
+//*-------------------------
+function login(arrayIngresado, contenedor) {
+    contenedor.innerHTML = `
+        <div id='inicioDato'>
+            <img src='multimedia/logos/logo-no-background.png' alt='' />
+            <input type='text' class='input' id='inputUsuario' placeholder='Ingresá tu apellido (Perez o Torres)' />
+            <button class='botonCargar' id='botonInicioUsuario'>INICIO</button>
+        </div>
+    `;
+    let inputUsuario = document.getElementById('inputUsuario');
+    botonInicioUsuario.addEventListener('click', () => bienvenida(arrayIngresado, inputUsuario.value, contenedor));
+    inputUsuario.addEventListener('keypress', (e) => funcionEnter(e, arrayIngresado, inputUsuario.value, contenedor));
+
+    function funcionEnter(e, arrayIngresado, input, contenedor) {
+        if (e.which === 13 || e.keyCode === 13) {
+            bienvenida(arrayIngresado, input, contenedor);
+        }
+    }
 }
 
 //*------------------------
@@ -289,8 +308,8 @@ function infoUsuario(arrayUsuarios, usuario) {
     contenedorUsuario.innerHTML = `
                 <img class="fotoUsuario" src="multimedia/img/${usuarioEncontrado.rutaImagen}" alt="">
                 <div id="datosUsuario">
-                <p id="textoUsuario"></p>
-                <p id="legajoUsuario"></p>
+                    <p id="textoUsuario"></p>
+                    <p id="legajoUsuario"></p>
                 </div>
             `;
     let textoUsuario = document.getElementById('textoUsuario');
@@ -438,14 +457,14 @@ function contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor) {
     titulo('Cargar Notas');
     contenedor.innerHTML = `
         <div class="datosNuevoAlumno">
-        <select class="input" id="inputAlumnos"><option value="-">Seleccioná un alumno</option></select>
-        <select class="input inputNotas" id="inputTP1"><option value="-">Seleccioná la nota del TP1</option></select>
-        <select class="input inputNotas" id="inputTP2"><option value="-">Seleccioná la nota del TP2</option></select>
-        <select class="input inputNotas" id="inputTP3"><option value="-">Seleccioná la nota del TP3</option></select>
-        <select class="input inputNotas" id="inputTP4"><option value="-">Seleccioná la nota del TP4</option></select>
-        <select class="input inputNotas" id="inputPrimerParcial"><option value="-">Seleccioná la nota del Primer Parcial</option></select>
-        <select class="input inputNotas" id="inputSegundoParcial"><option value="-">Seleccioná la nota del Segundo Parcial</option></select>
-        <button class="botonCargar" id="botonCargarNota">CARGAR</button>
+            <select class="input" id="inputAlumnos"><option value="-">Seleccioná un alumno</option></select>
+            <select class="input inputNotas" id="inputTP1"><option value="-">Seleccioná la nota del TP1</option></select>
+            <select class="input inputNotas" id="inputTP2"><option value="-">Seleccioná la nota del TP2</option></select>
+            <select class="input inputNotas" id="inputTP3"><option value="-">Seleccioná la nota del TP3</option></select>
+            <select class="input inputNotas" id="inputTP4"><option value="-">Seleccioná la nota del TP4</option></select>
+            <select class="input inputNotas" id="inputPrimerParcial"><option value="-">Seleccioná la nota del Primer Parcial</option></select>
+            <select class="input inputNotas" id="inputSegundoParcial"><option value="-">Seleccioná la nota del Segundo Parcial</option></select>
+            <button class="botonCargar" id="botonCargarNota">CARGAR</button>
         </div>
         `;
 
@@ -611,6 +630,14 @@ function nuevaNota(arrayIngresado, inputLegajo, contenedor, arrayNotas) {
         alertOk('Notas cargadas');
         contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor);
     }
+}
+
+//*-------------------------
+//* CERRAR SESION
+//*-------------------------
+function logout() {
+    sessionStorage.removeItem('usuarioGuardado');
+    location.reload();
 }
 
 //*-------------------------
