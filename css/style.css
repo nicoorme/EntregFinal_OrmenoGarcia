@@ -57,6 +57,12 @@ main {
     gap: 6px;
 }
 
+#botonCerrarSesion {
+    color: #ff6565;
+    font-size: 12px;
+    cursor: pointer;
+}
+
 ul {
     width: 100%;
     display: flex;
@@ -75,6 +81,11 @@ ul {
 
 .botonMenu:hover {
     background-color: #003366;
+}
+
+#botonCerrarSesion img {
+    width: 15px;
+    height: auto;
 }
 
 .iconos {

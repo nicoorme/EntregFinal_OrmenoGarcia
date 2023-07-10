@@ -243,12 +243,6 @@ function ejecucionPrograma() {
     alumnosJSON
         ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
         : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
-
-    //*-------------------------
-    //* EJECUCION CERRAR SESION
-    //*-------------------------
-    let botonCerrarSesion = document.getElementById('botonCerrarSesion');
-    botonCerrarSesion.addEventListener('click', logout);
 }
 
 //*-------------------------
@@ -310,10 +304,13 @@ function infoUsuario(arrayUsuarios, usuario) {
                 <div id="datosUsuario">
                     <p id="textoUsuario"></p>
                     <p id="legajoUsuario"></p>
+                    <a id="botonCerrarSesion">CERRAR SESION</a>
                 </div>
             `;
     let textoUsuario = document.getElementById('textoUsuario');
     let legajoUsuario = document.getElementById('legajoUsuario');
+    let botonCerrarSesion = document.getElementById('botonCerrarSesion');
+    botonCerrarSesion.addEventListener('click', logout);
     textoUsuario.innerText = `${usuarioEncontrado.nombre} ${usuarioEncontrado.apellido}`;
     legajoUsuario.innerText = `Legajo: ${usuarioEncontrado.legajo}`;
 }
