@@ -10,6 +10,7 @@ body {
     background-color: #003366;
     font-family: 'Roboto', sans-serif;
     color: #ffffff;
+    cursor: default;
 }
 
 main {
@@ -44,10 +45,11 @@ main {
     align-items: center;
     justify-content: center;
     background-color: #878787aa;
+    font-size: 14px;
 }
 
 .fotoUsuario {
-    width: 75px;
+    width: 65px;
     border-radius: 50%;
 }
 
