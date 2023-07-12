@@ -142,17 +142,28 @@ ul {
 }
 
 .barraFiltro {
-    height: 100%;
+    height: 40px;
+    width: 450px;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
+    padding: 8px;
+    gap: 8px;
+    border-radius: 3px;
 }
 
-#buscador {
-    width: 500px;
-    height: 40px;
-    border-radius: 3px;
-    padding: 15px;
-    font-size: 16px;
+.barraFiltro img {
+    width: 20px;
+}
+
+.barraFiltro input {
+    width: 100%;
+    border: none;
+    font-size: 14px;
+}
+
+.barraFiltro input:focus {
+    outline-style: none;
 }
 
 #contenedorInfo {

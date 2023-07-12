@@ -200,7 +200,6 @@ function ejecucionPrograma() {
     //*------------------------
     let contenedorInfo = document.getElementById('contenedorInfo');
     let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
-    //TODO-------
     !usuarioGuardado ? login(usuarios, contenedorInfo) : bienvenida(usuarios, usuarioGuardado, contenedorInfo);
     //*------------------------
     //* EJECUCION INICIO
