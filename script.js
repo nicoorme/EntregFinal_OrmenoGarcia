@@ -1,17 +1,9 @@
-ejecucionPrograma();
-
-// async function ejecucionPrograma() {
-//     try {
-//         await dataJSON();
-//     } catch (error) {
-//         alert(error);
-//     }
-// }
+programaPrincipal();
 
 //*-----------------------
 //* PROGRAMA
 //*-----------------------
-function ejecucionPrograma() {
+function programaPrincipal() {
     //*------------------------
     //* EJECUCION LOGIN
     //*------------------------
@@ -54,7 +46,6 @@ function ejecucionPrograma() {
 
         fetch(dataJSON)
             .then((response) => response.json())
-
             .then((data) => {
                 let usuarios = data.usuarios;
                 let alumnos = data.alumnos;
@@ -80,7 +71,7 @@ function ejecucionPrograma() {
                     ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
                     : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
             })
-            .catch((error) =>
+            .catch(() =>
                 Swal.fire({
                     text: 'Error en la base de datos, intente mas tarde',
                     icon: 'error',
@@ -126,7 +117,7 @@ function bienvenida(arrayUsuarios, usuario, contenedor) {
             : (contenedor.innerHTML = `
                     <h1 class="inicio">Bienvenido ${usuarioEncontrado.nombre}</h1>
                     `);
-        guardarUsuario(usuario);
+        sessionStorage.setItem('usuarioGuardado', usuario);
         infoUsuario(arrayUsuarios, usuario);
         mostrarElemento('barraLateral', 'oculto');
         mostrarElemento('contenedorTitulo', 'oculto');
@@ -144,7 +135,6 @@ function bienvenida(arrayUsuarios, usuario, contenedor) {
 function infoUsuario(arrayUsuarios, usuario) {
     let contenedorUsuario = document.getElementById('contenedorUsuario');
     let usuarioEncontrado = arrayUsuarios.find(({ login }) => login == usuario.toLowerCase());
-
     contenedorUsuario.innerHTML = `
                 <img class="fotoUsuario" src="multimedia/img/${usuarioEncontrado.rutaImagen}" alt="">
                 <div id="datosUsuario">
@@ -159,10 +149,6 @@ function infoUsuario(arrayUsuarios, usuario) {
     botonCerrarSesion.addEventListener('click', logout);
     textoUsuario.innerText = `${usuarioEncontrado.nombre} ${usuarioEncontrado.apellido}`;
     legajoUsuario.innerText = `Legajo: ${usuarioEncontrado.legajo}`;
-}
-
-function guardarUsuario(usuario) {
-    sessionStorage.setItem('usuarioGuardado', usuario);
 }
 
 function inicio(arrayIngresado, contenedor) {
@@ -200,7 +186,6 @@ function listaAlumnos(array, contenedor) {
 
     array.forEach(({ legajo, nombre, apellido, tp1, tp2, tp3, tp4, primerParcial, segundoParcial, estado }) => {
         let tarjetaAlumno = document.createElement('div');
-
         tarjetaAlumno.classList.add('tarjetaAlumno');
         tarjetaAlumno.innerHTML = `
             <p>${legajo}</p>
@@ -252,7 +237,6 @@ function contenedorNuevoAlumno(arrayIngresado, contenedor) {
     let inputApellido = document.getElementById('apellidoNuevoAlumno');
     let inputDNI = document.getElementById('dniNuevoAlumno');
     botonCargarNuevoAlumno.addEventListener('click', () => nuevoAlumno(arrayIngresado));
-
     inputNombre.addEventListener('keypress', (e) => funcionEnter(e, arrayIngresado));
     inputApellido.addEventListener('keypress', (e) => funcionEnter(e, arrayIngresado));
     inputDNI.addEventListener('keypress', (e) => funcionEnter(e, arrayIngresado));
@@ -280,6 +264,7 @@ function nuevoAlumno(arrayIngresado) {
     let segundoParcial = '-';
     let estado = '-';
     legajoNuevo = legajo;
+
     if (nombre && apellido && dni) {
         arrayIngresado.push({ legajo, nombre, apellido, dni, tp1, tp2, tp3, tp4, primerParcial, segundoParcial, estado });
         alertOk('Alumno ingresado');
@@ -313,6 +298,7 @@ function contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor) {
 
     let inputLegajo;
     let inputAlumnos = document.getElementById('inputAlumnos');
+
     arrayIngresado.forEach(({ legajo, nombre, apellido }) => {
         let elementosListaAlumnos = document.createElement('option');
         elementosListaAlumnos.innerText = `
@@ -323,9 +309,7 @@ function contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor) {
         } else {
             elementosListaAlumnos.value = '';
         }
-
         inputAlumnos.appendChild(elementosListaAlumnos);
-
         inputAlumnos.addEventListener('change', datoControlAlumno);
 
         function datoControlAlumno(e) {
@@ -346,7 +330,6 @@ function contenedorCargarNotas(arrayIngresado, arrayNotas, contenedor) {
         });
         input.appendChild(fragment);
     });
-
     let botonCargarNotas = document.getElementById('botonCargarNota');
     botonCargarNotas.addEventListener('click', () => nuevaNota(arrayIngresado, inputLegajo, contenedor, arrayNotas));
 }
@@ -363,7 +346,6 @@ function nuevaNota(arrayIngresado, inputLegajo, contenedor, arrayNotas) {
         let inputTP4 = document.getElementById('inputTP4');
         let inputPrimerParcial = document.getElementById('inputPrimerParcial');
         let inputSegundoParcial = document.getElementById('inputSegundoParcial');
-
         let alumnoNotas = arrayIngresado.find(({ legajo }) => legajo == inputLegajo);
 
         let tp1;
