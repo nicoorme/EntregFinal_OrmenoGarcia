@@ -1,11 +1,55 @@
 ejecucionPrograma();
 
+// async function ejecucionPrograma() {
+//     try {
+//         await dataJSON();
+//     } catch (error) {
+//         alert(error);
+//     }
+// }
+
 //*-----------------------
 //* PROGRAMA
 //*-----------------------
 function ejecucionPrograma() {
-    dataJson();
-    function dataJson() {
+    //*------------------------
+    //* EJECUCION LOGIN
+    //*------------------------
+    let contenedorInfo = document.getElementById('contenedorInfo');
+    let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
+
+    //*------------------------
+    //* EJECUCION INICIO
+    //*------------------------
+    let botonInicio = document.getElementById('botonInicio');
+
+    //*-------------------------
+    //* EJECUCION LISTA ALUMNOS
+    //*-------------------------
+    let alumnosJSON = JSON.parse(localStorage.getItem('alumnosStorage'));
+    let botonLista = document.getElementById('botonLista');
+
+    //*-------------------------
+    //* EJECUCION BUSCADOR
+    //*-------------------------
+    let buscador = document.getElementById('buscador');
+
+    //*-------------------------
+    //* EJECUCION NUEVO ALUMNO
+    //*-------------------------
+    let botonNuevoAlumno = document.getElementById('botonNuevoAlumno');
+
+    //*-------------------------
+    //* EJECUCION CARGAR NOTAS
+    //*-------------------------
+    let botonCargarNotas = document.getElementById('botonCargarNotas');
+
+    //*-------------------------
+    //* EJECUCION dataJSON
+    //*-------------------------
+    dataJSON();
+
+    function dataJSON() {
         const dataJSON = './data.json';
 
         fetch(dataJSON)
@@ -35,56 +79,16 @@ function ejecucionPrograma() {
                 alumnosJSON
                     ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
                     : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
-            });
+            })
+            .catch((error) =>
+                Swal.fire({
+                    text: 'Error en la base de datos, intente mas tarde',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#003366',
+                })
+            );
     }
-
-    //*------------------------
-    //* LOGIN
-    //*------------------------
-    let contenedorInfo = document.getElementById('contenedorInfo');
-    let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
-    // !usuarioGuardado ? login(usuarios, contenedorInfo) : bienvenida(usuarios, usuarioGuardado, contenedorInfo);
-    //*------------------------
-    //* EJECUCION INICIO
-    //*------------------------
-    let botonInicio = document.getElementById('botonInicio');
-    // botonInicio.addEventListener('click', () => inicio(usuarios, contenedorInfo));
-
-    //*-------------------------
-    //* EJECUCION LISTA ALUMNOS
-    //*-------------------------
-    let alumnosJSON = JSON.parse(localStorage.getItem('alumnosStorage'));
-    let botonLista = document.getElementById('botonLista');
-
-    // alumnosJSON
-    //     ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
-    //     : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
-
-    //*-------------------------
-    //* EJECUCION BUSCADOR
-    //*-------------------------
-    let buscador = document.getElementById('buscador');
-    // alumnosJSON
-    //     ? buscador.addEventListener('input', () => filtrarYListar(alumnosJSON, buscador, contenedorInfo))
-    //     : buscador.addEventListener('input', () => filtrarYListar(alumnos, buscador, contenedorInfo));
-
-    //*-------------------------
-    //* EJECUCION NUEVO ALUMNO
-    //*-------------------------
-    let botonNuevoAlumno = document.getElementById('botonNuevoAlumno');
-
-    // alumnosJSON
-    //     ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo))
-    //     : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnos, contenedorInfo));
-
-    //*-------------------------
-    //* EJECUCION CARGAR NOTAS
-    //*-------------------------
-    let botonCargarNotas = document.getElementById('botonCargarNotas');
-
-    // alumnosJSON
-    //     ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
-    //     : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
 }
 
 //*-------------------------
