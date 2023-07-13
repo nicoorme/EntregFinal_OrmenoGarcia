@@ -3,7 +3,32 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Primary Meta Tags -->
         <title>UVLA - Sistema de carga de notas</title>
+        <meta name="title" content="UVLA - Sistema de carga de notas" />
+        <meta
+            name="description"
+            content="Bienvenido al sistema de gestión de notas y alumnos de la Universidad de Villa La Angostura. Con este gestor podrás ver el listado de alumnos vigente, cargar nuevos alumnos e ingresar las notas de los TP y Parciales, para así conocer rápidamente el estado de cada uno." />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://nicoorme.github.io/EntregaFinal_OrmenoGarcia/" />
+        <meta property="og:title" content="UVLA - Sistema de carga de notas" />
+        <meta
+            property="og:description"
+            content="Bienvenido al sistema de gestión de notas y alumnos de la Universidad de Villa La Angostura. Con este gestor podrás ver el listado de alumnos vigente, cargar nuevos alumnos e ingresar las notas de los TP y Parciales, para así conocer rápidamente el estado de cada uno." />
+        <meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://nicoorme.github.io/EntregaFinal_OrmenoGarcia/" />
+        <meta property="twitter:title" content="UVLA - Sistema de carga de notas" />
+        <meta
+            property="twitter:description"
+            content="Bienvenido al sistema de gestión de notas y alumnos de la Universidad de Villa La Angostura. Con este gestor podrás ver el listado de alumnos vigente, cargar nuevos alumnos e ingresar las notas de los TP y Parciales, para así conocer rápidamente el estado de cada uno." />
+        <meta property="twitter:image" content="https://metatags.io/images/meta-tags.png" />
+
+        <!-- Meta Tags Generated with https://metatags.io -->
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
     </head>
@@ -16,16 +41,17 @@
                 <div id="contenedorUsuario"></div>
                 <ul>
                     <li class="botonMenu activo" id="botonInicio">
-                        <span><img src="multimedia/iconos/icons8-casa-50.png" class="iconos" alt="" /></span><a>INICIO</a>
+                        <span><img src="multimedia/iconos/icons8-casa-50.png" class="iconos" alt="icono inicio" /></span><a>INICIO</a>
                     </li>
                     <li class="botonMenu" id="botonLista">
-                        <span><img src="multimedia/iconos/icons8-lista-50.png" class="iconos" alt="" /></span><a>LISTA ALUMNOS</a>
+                        <span><img src="multimedia/iconos/icons8-lista-50.png" class="iconos" alt="icono lista" /></span
+                        ><a>LISTA ALUMNOS</a>
                     </li>
                     <li class="botonMenu" id="botonNuevoAlumno">
-                        <span><img src="multimedia/iconos/icons8-nuevo-50.png" class="iconos" alt="" /></span><a>NUEVO ALUMNO</a>
+                        <span><img src="multimedia/iconos/icons8-nuevo-50.png" class="iconos" alt="icono nuevo" /></span><a>NUEVO ALUMNO</a>
                     </li>
                     <li class="botonMenu" id="botonCargarNotas">
-                        <span><img src="multimedia/iconos/icons8-notas-50.png" class="iconos" alt="" /></span><a>CARGAR NOTAS</a>
+                        <span><img src="multimedia/iconos/icons8-notas-50.png" class="iconos" alt="icono notas" /></span><a>CARGAR NOTAS</a>
                     </li>
                 </ul>
             </div>
@@ -33,7 +59,7 @@
                 <div id="contenedorTitulo" class="centrado contenedorTitulo oculto">
                     <p id="titulo">UNIVERSIDAD DE VILLA LA ANGOSTURA</p>
                     <div id="barraFiltros" class="barraFiltro oculto">
-                        <span><img src="multimedia/iconos/icons8-lupa-50.png" alt="" /></span>
+                        <span><img src="multimedia/iconos/icons8-lupa-50.png" alt="icono lupa" /></span>
                         <input type="text" id="buscador" placeholder="Buscá al alumno por Legajo, Nombre, Apellido o Estado" />
                     </div>
                 </div>

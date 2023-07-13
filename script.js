@@ -88,7 +88,7 @@ function programaPrincipal() {
 function login(arrayIngresado, contenedor) {
     contenedor.innerHTML = `
         <div id='inicioDato'>
-            <img src='multimedia/logos/logo-no-background.png' alt='' />
+            <img src='multimedia/logos/logo-no-background.png' alt='logo UVLA' />
             <input type='text' class='input' id='inputUsuario' placeholder='Ingresá tu apellido (Perez o Torres)' />
             <button class='botonCargar' id='botonInicioUsuario'>INICIO</button>
         </div>
@@ -136,7 +136,7 @@ function infoUsuario(arrayUsuarios, usuario) {
     let contenedorUsuario = document.getElementById('contenedorUsuario');
     let usuarioEncontrado = arrayUsuarios.find(({ login }) => login == usuario.toLowerCase());
     contenedorUsuario.innerHTML = `
-                <img class="fotoUsuario" src="multimedia/img/${usuarioEncontrado.rutaImagen}" alt="">
+                <img class="fotoUsuario" src="multimedia/img/${usuarioEncontrado.rutaImagen}" alt="foto de usuario">
                 <div id="datosUsuario">
                     <p id="textoUsuario"></p>
                     <p id="legajoUsuario"></p>
