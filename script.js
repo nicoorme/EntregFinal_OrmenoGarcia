@@ -4,220 +4,51 @@ ejecucionPrograma();
 //* PROGRAMA
 //*-----------------------
 function ejecucionPrograma() {
-    // let usuarios = [
-    //     {
-    //         legajo: 1,
-    //         nombre: 'Cecilia',
-    //         apellido: 'Lorusso',
-    //         login: 'lorusso',
-    //         contrasena: 'prueba',
-    //         dni: 45234442,
-    //         rutaImagen: 'profesora.jpg',
-    //         sexo: 'Femenino',
-    //     },
-    //     {
-    //         legajo: 2,
-    //         nombre: 'Maria',
-    //         apellido: 'Farisello',
-    //         login: 'farisello',
-    //         contrasena: 'prueba',
-    //         dni: 42330393,
-    //         rutaImagen: 'profesora.jpg',
-    //         sexo: 'Femenino',
-    //     },
-    //     {
-    //         legajo: 3,
-    //         nombre: 'Guillermo',
-    //         apellido: 'Laito',
-    //         login: 'laito',
-    //         contrasena: 'prueba',
-    //         dni: 43982710,
-    //         rutaImagen: 'profesor.jpg',
-    //         sexo: 'Masculino',
-    //     },
-    //     {
-    //         legajo: 4,
-    //         nombre: 'Cristina',
-    //         apellido: 'Perez',
-    //         login: 'perez',
-    //         contrasena: 'prueba',
-    //         dni: 44992692,
-    //         rutaImagen: 'profesora.jpg',
-    //         sexo: 'Femenino',
-    //     },
-    //     {
-    //         legajo: 5,
-    //         nombre: 'Juan Carlos',
-    //         apellido: 'Torres',
-    //         login: 'torres',
-    //         contrasena: 'prueba',
-    //         dni: 45927433,
-    //         rutaImagen: 'profesor.jpg',
-    //         sexo: 'Masculino',
-    //     },
-    // ];
+    dataJson();
+    function dataJson() {
+        const dataJSON = './data.json';
 
-    // let alumnos = [
-    //     {
-    //         legajo: 1001,
-    //         nombre: 'Ana',
-    //         apellido: 'Vivas',
-    //         dni: 45234442,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1002,
-    //         nombre: 'Manuel',
-    //         apellido: 'Ordoñez',
-    //         dni: 42330393,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1003,
-    //         nombre: 'Alejandro',
-    //         apellido: 'Moran',
-    //         dni: 43982710,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1004,
-    //         nombre: 'Eugenio',
-    //         apellido: 'Islas',
-    //         dni: 44992692,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1005,
-    //         nombre: 'Carla',
-    //         apellido: 'Gomez',
-    //         dni: 45927433,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1006,
-    //         nombre: 'Natalia',
-    //         apellido: 'Acosta',
-    //         dni: 44229018,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1007,
-    //         nombre: 'Federico',
-    //         apellido: 'Rivas',
-    //         dni: 43847993,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1008,
-    //         nombre: 'Laura',
-    //         apellido: 'Giordano',
-    //         dni: 45929111,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1009,
-    //         nombre: 'Micaela',
-    //         apellido: 'Martinez',
-    //         dni: 46301112,
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         estado: '-',
-    //     },
-    //     {
-    //         legajo: 1010,
-    //         nombre: 'Joaquin',
-    //         apellido: 'Garcia',
-    //         dni: 46321234,
-    //         tp1: '-',
-    //         tp2: '-',
-    //         tp3: '-',
-    //         tp4: '-',
-    //         primerParcial: '-',
-    //         segundoParcial: '-',
-    //         estado: '-',
-    //     },
-    // ];
+        fetch(dataJSON)
+            .then((response) => response.json())
 
-    // let notasPosibles = ['AUSENTE', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            .then((data) => {
+                let usuarios = data.usuarios;
+                let alumnos = data.alumnos;
+                let notasPosibles = data.notasPosibles;
 
-    const dataJSON = './data.json';
+                !usuarioGuardado ? login(usuarios, contenedorInfo) : bienvenida(usuarios, usuarioGuardado, contenedorInfo);
 
-    let usuarios = [];
-    let alumnos = [];
-    let notasPosibles = [];
+                botonInicio.addEventListener('click', () => inicio(usuarios, contenedorInfo));
 
-    fetch(dataJSON)
-        .then((response) => response.json())
+                alumnosJSON
+                    ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
+                    : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
 
-        .then((data) => {
-            usuarios = data.usuarios;
-            alumnos = data.alumnos;
-            notasPosibles = data.notasPosibles;
-        });
+                alumnosJSON
+                    ? buscador.addEventListener('input', () => filtrarYListar(alumnosJSON, buscador, contenedorInfo))
+                    : buscador.addEventListener('input', () => filtrarYListar(alumnos, buscador, contenedorInfo));
+
+                alumnosJSON
+                    ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo))
+                    : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnos, contenedorInfo));
+
+                alumnosJSON
+                    ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
+                    : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
+            });
+    }
 
     //*------------------------
     //* LOGIN
     //*------------------------
     let contenedorInfo = document.getElementById('contenedorInfo');
     let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
-    !usuarioGuardado ? login(usuarios, contenedorInfo) : bienvenida(usuarios, usuarioGuardado, contenedorInfo);
+    // !usuarioGuardado ? login(usuarios, contenedorInfo) : bienvenida(usuarios, usuarioGuardado, contenedorInfo);
     //*------------------------
     //* EJECUCION INICIO
     //*------------------------
     let botonInicio = document.getElementById('botonInicio');
-    botonInicio.addEventListener('click', () => inicio(usuarios, contenedorInfo));
+    // botonInicio.addEventListener('click', () => inicio(usuarios, contenedorInfo));
 
     //*-------------------------
     //* EJECUCION LISTA ALUMNOS
@@ -225,35 +56,35 @@ function ejecucionPrograma() {
     let alumnosJSON = JSON.parse(localStorage.getItem('alumnosStorage'));
     let botonLista = document.getElementById('botonLista');
 
-    alumnosJSON
-        ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
-        : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
+    // alumnosJSON
+    //     ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
+    //     : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
 
     //*-------------------------
     //* EJECUCION BUSCADOR
     //*-------------------------
     let buscador = document.getElementById('buscador');
-    alumnosJSON
-        ? buscador.addEventListener('input', () => filtrarYListar(alumnosJSON, buscador, contenedorInfo))
-        : buscador.addEventListener('input', () => filtrarYListar(alumnos, buscador, contenedorInfo));
+    // alumnosJSON
+    //     ? buscador.addEventListener('input', () => filtrarYListar(alumnosJSON, buscador, contenedorInfo))
+    //     : buscador.addEventListener('input', () => filtrarYListar(alumnos, buscador, contenedorInfo));
 
     //*-------------------------
     //* EJECUCION NUEVO ALUMNO
     //*-------------------------
     let botonNuevoAlumno = document.getElementById('botonNuevoAlumno');
 
-    alumnosJSON
-        ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo))
-        : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnos, contenedorInfo));
+    // alumnosJSON
+    //     ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo))
+    //     : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnos, contenedorInfo));
 
     //*-------------------------
     //* EJECUCION CARGAR NOTAS
     //*-------------------------
     let botonCargarNotas = document.getElementById('botonCargarNotas');
 
-    alumnosJSON
-        ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
-        : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
+    // alumnosJSON
+    //     ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
+    //     : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
 }
 
 //*-------------------------
