@@ -7,6 +7,9 @@ function programaPrincipal() {
     //*-------------------------
     //* EJECUCION dataJSON
     //*-------------------------
+    let contenedorInfo = document.getElementById('contenedorInfo');
+    let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
+    let alumnosStorage = JSON.parse(localStorage.getItem('alumnosStorage'));
     const dataJSON = './data.json';
 
     fetch(dataJSON)
@@ -15,13 +18,10 @@ function programaPrincipal() {
             let usuariosJSON = data.usuarios;
             let alumnosJSON = data.alumnos;
             let notasPosiblesJSON = data.notasPosibles;
-            let contenedorInfo = document.getElementById('contenedorInfo');
-            let alumnosStorage = JSON.parse(localStorage.getItem('alumnosStorage'));
 
             //*------------------------
             //* EJECUCION LOGIN
             //*------------------------
-            let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
             !usuarioGuardado ? login(usuariosJSON, contenedorInfo) : bienvenida(usuariosJSON, usuarioGuardado, contenedorInfo);
 
             //*------------------------
