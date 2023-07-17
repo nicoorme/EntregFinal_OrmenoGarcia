@@ -12,55 +12,55 @@ function programaPrincipal() {
     fetch(dataJSON)
         .then((response) => response.json())
         .then((data) => {
-            let usuarios = data.usuarios;
-            let alumnos = data.alumnos;
-            let notasPosibles = data.notasPosibles;
+            let usuariosJSON = data.usuarios;
+            let alumnosJSON = data.alumnos;
+            let notasPosiblesJSON = data.notasPosibles;
             let contenedorInfo = document.getElementById('contenedorInfo');
-            let alumnosJSON = JSON.parse(localStorage.getItem('alumnosStorage'));
+            let alumnosStorage = JSON.parse(localStorage.getItem('alumnosStorage'));
 
             //*------------------------
             //* EJECUCION LOGIN
             //*------------------------
             let usuarioGuardado = sessionStorage.getItem('usuarioGuardado');
-            !usuarioGuardado ? login(usuarios, contenedorInfo) : bienvenida(usuarios, usuarioGuardado, contenedorInfo);
+            !usuarioGuardado ? login(usuariosJSON, contenedorInfo) : bienvenida(usuariosJSON, usuarioGuardado, contenedorInfo);
 
             //*------------------------
             //* EJECUCION INICIO
             //*------------------------
             let botonInicio = document.getElementById('botonInicio');
-            botonInicio.addEventListener('click', () => inicio(usuarios, contenedorInfo));
+            botonInicio.addEventListener('click', () => inicio(usuariosJSON, contenedorInfo));
 
             //*-------------------------
             //* EJECUCION LISTA ALUMNOS
             //*-------------------------
             let botonLista = document.getElementById('botonLista');
-            alumnosJSON
-                ? botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo))
-                : botonLista.addEventListener('click', () => listaAlumnos(alumnos, contenedorInfo));
+            alumnosStorage
+                ? botonLista.addEventListener('click', () => listaAlumnos(alumnosStorage, contenedorInfo))
+                : botonLista.addEventListener('click', () => listaAlumnos(alumnosJSON, contenedorInfo));
 
             //*-------------------------
             //* EJECUCION BUSCADOR
             //*-------------------------
             let buscador = document.getElementById('buscador');
-            alumnosJSON
-                ? buscador.addEventListener('input', () => filtrarYListar(alumnosJSON, buscador, contenedorInfo))
-                : buscador.addEventListener('input', () => filtrarYListar(alumnos, buscador, contenedorInfo));
+            alumnosStorage
+                ? buscador.addEventListener('input', () => filtrarYListar(alumnosStorage, buscador, contenedorInfo))
+                : buscador.addEventListener('input', () => filtrarYListar(alumnosJSON, buscador, contenedorInfo));
 
             //*-------------------------
             //* EJECUCION NUEVO ALUMNO
             //*-------------------------
             let botonNuevoAlumno = document.getElementById('botonNuevoAlumno');
-            alumnosJSON
-                ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo))
-                : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnos, contenedorInfo));
+            alumnosStorage
+                ? botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosStorage, contenedorInfo))
+                : botonNuevoAlumno.addEventListener('click', () => contenedorNuevoAlumno(alumnosJSON, contenedorInfo));
 
             //*-------------------------
             //* EJECUCION CARGAR NOTAS
             //*-------------------------
             let botonCargarNotas = document.getElementById('botonCargarNotas');
-            alumnosJSON
-                ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosibles, contenedorInfo))
-                : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnos, notasPosibles, contenedorInfo));
+            alumnosStorage
+                ? botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosStorage, notasPosiblesJSON, contenedorInfo))
+                : botonCargarNotas.addEventListener('click', () => contenedorCargarNotas(alumnosJSON, notasPosiblesJSON, contenedorInfo));
         })
         .catch(() =>
             Swal.fire({
